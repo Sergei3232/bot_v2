@@ -1,6 +1,8 @@
 package main
 
 import (
+	"fmt"
+	"github.com/Sergei3232/bot_v2/internal/postgres"
 	"log"
 	"os"
 
@@ -10,6 +12,14 @@ import (
 
 func main() {
 	_ = godotenv.Load()
+	os.LookupEnv("TELEGRAM_ID")
+
+	dbBot, err := postgres.NewDBConnect()
+	if err != nil {
+		log.Panic(err)
+	}
+
+	fmt.Println(dbBot)
 
 	token, found := os.LookupEnv("TELEGRAM_ID")
 	if !found {
